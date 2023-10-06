@@ -22,23 +22,38 @@ int main() {
 
   // send message
   if (status == 0) {
-    // status = write(s, "hello!", 6);
-    printf("Connected to server\n");
-    char message[1024];
-    while (1) {
-      printf("Entere a message: ");
-      fgets(message, sizeof(message), stdin);
-      if (strcmp(message, "exit\n") == 0) {
-        break;
+      printf("Welcome to Hangman\n");
+      char guess[2];
+      while(1){
+          //receive info from server 
+          char message[1024];
+          memset(message, 0, sizeof(message)-1);
+          status = recv(s, message, sizeof(message)-1,0);
+          if(status <=0){
+              printf("Server disconnected");
+              break; 
+          }
+          //Display game info from server 
+          printf("%s", message);
+
+          //if gameOver, exit loop
+          if(strstr(message, "Game Over") != NULL){
+              break;
+          }
+
+          //if the game is stille going, prompt the user to guess a letter
+          printf("Enter a letter guess: ");
+          fgets(guess, sizeof(guess), stdin);
+
+          //send the letter guess to the server 
+          status = write(s, guess, strlen(guess));
+          if(status < 0){
+              perror("Write error");
+              break; 
+          }
       }
-      status = write(s, message, strlen(message));
-      if (status < 0) {
-        perror("Write error");
-        break;
-      }
-    }
   } else {
-    perror("Connection error");
+      perror("Connection error");
   }
   close(s);
   return 0;
