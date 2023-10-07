@@ -26,8 +26,8 @@ Follow the same steps in your client computer till the discoverable part, then, 
 ## Initialize connection 
 Now that everything has been set up, compile the server.c and client.c codes with the following command:
 
-gcc -o client client.c  -lbluetooth
-gcc -o server server.c  -lbluetooth
+        gcc -o client client.c  -lbluetooth
+        gcc -o server server.c  -lbluetooth
 
 Perfect! Now you just have to run the server and client executables in the respective machines(./server and ./client) and have fun.
 
