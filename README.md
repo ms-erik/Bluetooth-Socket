@@ -1,35 +1,45 @@
-# Bluetooth-Socket
-Implementing a Bluetooth socket in C.
-        Link for the video https://drive.google.com/drive/folders/1zBjldi3ISgL7iKhhF2b_ot-IWbrbkxTd?usp=drive_link 
+# Bluetooth Socket Implementation in C
 
-## Group members
-        Pedro Arthur do Prado Françoso - 12547301
-        Carlos Nery Ribeiro - 12547698
-        Erik Melges - 12547399
-        Fernando Clarindo Cristóvão - 12547573
+**Video Tutorial Link:** [Video Tutorial](https://drive.google.com/drive/folders/1zBjldi3ISgL7iKhhF2b_ot-IWbrbkxTd?usp=drive_link)
 
-## Setting up Bluetooth Address:
-In order to implement the bluetooth socket, you'll need two computers with linux distributions. In our case, we used a Arch as server host and an ubunto as client.
-Run the hciconfig command in terminal to see what is your bluetooth address, look for a line similar to "BD Address: XX:XX:XX:XX:XX:XX". Or for a more general approach, run bluetoothctl and type show, the controller is your Bluetooth address.
-Now, in the client code you'll have to change the dest variable with your bluetooth address.
+## Group Members
+- Pedro Arthur do Prado Françoso - 12547301
+- Carlos Nery Ribeiro - 12547698
+- Erik Melges - 12547399
+- Fernando Clarindo Cristóvão - 12547573
 
-## Pairing server and client:
-First of all, make sure your bluetooth is turned on; for that, in the server computer follow this steps:
-- Open a terminal an run bluetoothctl;
-- type power on;
-- type agent on;
-- type default-agent;
-- type discoverable on;
-- type exit;
+## General Information
+- Linux Distribution: Arch Linux
+- Compiler: GCC (GNU Compiler Collection) 13.2.1 (20230801)
 
-Follow the same steps in your client computer till the discoverable part, then, instead type scan on to search for available devices. Now, on the client, use 'pair <server_address>' in the bluetoothctl to initiate pairing, note that you have to replace the <server_address> with the actual Bluetooth Address of the server. Be aware that you might need to enter a PIN code in both devices for confirmation.
+## Setting Up Bluetooth Address
+To implement the Bluetooth socket, you'll need two computers running Linux distributions. In our case, we used Arch Linux as the server host and Ubuntu as the client. Follow these steps:
 
-## Initialize connection 
-Now that everything has been set up, compile the server.c and client.c codes with the following command:
+1. Run the `hciconfig` command in the terminal to find your Bluetooth address. Look for a line similar to "BD Address: XX:XX:XX:XX:XX:XX."
 
-        gcc -o client client.c  -lbluetooth
-        gcc -o server server.c  -lbluetooth
+   Alternatively, for a more general approach, run `bluetoothctl` and type `show`. The controller listed is your Bluetooth address.
 
-Perfect! Now you just have to run the server and client executables in the respective machines(./server and ./client) and have fun.
+2. In the client code, replace the `dest` variable with your Bluetooth address.
 
-Remember to just type just one letter at a time.
+## Pairing the Server and Client
+Before pairing the server and client, ensure that Bluetooth is turned on. Follow these steps on the server computer:
+
+1. Open a terminal and run `bluetoothctl`.
+2. Type `power on`.
+3. Type `agent on`.
+4. Type `default-agent`.
+5. Type `discoverable on`.
+6. Type `exit`.
+
+Repeat the same steps on your client computer until the "discoverable" part. For the client, instead of "discoverable on," use `scan on` to search for available devices. On the client, initiate pairing with the server using the command 'pair <server_address>' in `bluetoothctl`. Replace `<server_address>` with the actual Bluetooth Address of the server. Note that you might need to enter a PIN code on both devices for confirmation.
+
+## Initializing the Connection
+Now that everything has been set up, compile the `server.c` and `client.c` codes with the following commands:
+
+```shell
+gcc -o client client.c -lbluetooth
+gcc -o server server.c -lbluetooth
+
+Once compiled, run the server and client executables on their respective machines (./server and ./client) and enjoy your Bluetooth socket connection.  
+
+Remember to input one letter at a time.
