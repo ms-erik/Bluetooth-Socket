@@ -3,7 +3,12 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <stdlib.h>
 
+void error(const char *msg){
+    perror(msg);
+    exit(EXIT_FAILURE);
+}
 int main() {
     struct sockaddr_rc addr = {0};
     int s, status;

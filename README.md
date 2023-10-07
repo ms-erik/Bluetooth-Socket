@@ -2,7 +2,7 @@
 Implementing a Bluetooth socket in C
 
 ## Setting up Bluetooth Address:
-In order to implement the bluetooth socket, you'll need two computers with linux distributions. In our case, we used a fedora as server host and an ubunto as client.
+In order to implement the bluetooth socket, you'll need two computers with linux distributions. In our case, we used a Arch as server host and an ubunto as client.
 Run the hciconfig command in terminal to see what is your bluetooth address, look for a line similar to "BD Address: XX:XX:XX:XX:XX:XX". Or for a more general approach, run bluetoothctl and type show, the controller is your Bluetooth address.
 Now, in the client code you'll have to change the dest variable with your bluetooth address.
 
@@ -25,3 +25,4 @@ gcc -o server server.c  -lbluetooth
 
 Perfect! Now you just have to run the server and client executables in the respective machines(./server and ./client) and have fun.
 
+Remember to just type just one letter at a time.

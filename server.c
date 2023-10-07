@@ -17,7 +17,16 @@ char *getRandomWord() {
     return wordList[randomIndex];
 }
 
+void error(const char *msg){
+    perror(msg);
+    exit(EXIT_FAILURE);
+}
+
 int main() {
+
+    //Provides a seed value do rand
+    srand(time(NULL));
+
     struct sockaddr_rc loc_addr = {0}, rem_addr = {0};
     char buf[1024] = {0};
     int server_socket, client, bytes_read = 0; // Initialize bytes_read
@@ -26,23 +35,29 @@ int main() {
     // Allocate socket
     server_socket = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
 
+    if(server_socket == -1){
+        error("Socket creation failed");
+    }
     // Bind socket to port 1 of the first available local Bluetooth adapter
     loc_addr.rc_family = AF_BLUETOOTH;
     loc_addr.rc_bdaddr = *BDADDR_ANY;
     loc_addr.rc_channel = (uint8_t)1;
     if (bind(server_socket, (struct sockaddr *)&loc_addr, sizeof(loc_addr))) {
-        perror("Bind failed\n");
-        return 1;
+        error("Bind failed\n");
     }
 
     // Put socket into listening mode
-    listen(server_socket, 1);
+    if(listen(server_socket, 1) == -1){
+        error("Listen failed");
+    }
 
     // Accept one connection
     client = accept(server_socket, (struct sockaddr *)&rem_addr, &opt);
+    if(client == -1){
+        error("Accept failed");
+    }
 
     // Seed the random number generator
-    srand(time(NULL));
 
     char *wordToGuess = getRandomWord();
     int wordLength = strlen(wordToGuess);
