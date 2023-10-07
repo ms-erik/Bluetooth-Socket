@@ -36,9 +36,8 @@ Repeat the same steps on your client computer until the "discoverable" part. For
 ## Initializing the Connection
 Now that everything has been set up, compile the `server.c` and `client.c` codes with the following commands:
 
-```shell
-gcc -o client client.c -lbluetooth
-gcc -o server server.c -lbluetooth
+      gcc -o client client.c -lbluetooth
+      gcc -o server server.c -lbluetooth
 
 Once compiled, run the server and client executables on their respective machines (./server and ./client) and enjoy your Bluetooth socket connection.  
 
