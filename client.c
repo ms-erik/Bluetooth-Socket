@@ -10,6 +10,7 @@ void error(const char *msg){
     exit(EXIT_FAILURE);
 }
 int main() {
+    //socket info  
     struct sockaddr_rc addr = {0};
     int s, status;
     char dest[18] = "B0:A4:60:5F:C1:60";
@@ -20,6 +21,7 @@ int main() {
     // Set the connection parameters
     addr.rc_family = AF_BLUETOOTH;
     addr.rc_channel = (uint8_t)1;
+    //convert dest into a bluetooth address
     str2ba(dest, &addr.rc_bdaddr);
 
     // Connect to the server
