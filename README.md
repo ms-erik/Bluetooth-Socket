@@ -1,6 +1,5 @@
 # Bluetooth-Socket
 Implementing a Bluetooth socket in C.
-
         Link for the video https://drive.google.com/drive/folders/1zBjldi3ISgL7iKhhF2b_ot-IWbrbkxTd?usp=drive_link 
 
 ## Group members
